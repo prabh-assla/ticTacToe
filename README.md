@@ -5,5 +5,9 @@
 ---
 2.) It has a *flash feature*. Once the pointer goes out of bounds of the grid, white flash is generated. This effect is better seen in an IDE terminal like VS Code terminal. 
 ---
-=> **Also, re-entering the same choice by the same player after he has played his turn will generate a flash again.**
+=> Also, re-entering the same choice by the same player after he has played his turn will **generate a flash again**.
 ---
+
+
+LANGUAGES USED =>
+ 	![C logo](C_logo.svg)
