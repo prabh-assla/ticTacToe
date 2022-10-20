@@ -1,11 +1,11 @@
-
-#include "__utilities.h"
 #include "__gridchecker.h"
 #include "__IF_filledchecker.h"
 #include "__whoISthePLAYER.h"
 
 #define CROSS 120
+#define cross 88
 #define CIRCLE 111
+#define circle 79
 
 int getcolumn(int y)
 {
@@ -91,32 +91,51 @@ void displayBox(int y, int x)
 int boxProcess(char player1[], int size1, char player2[], int size2)
 {
 
+    hide_cursor();
+
     int grid[3][3] = {32, 32, 32, 32, 32, 32, 32, 32, 32};
 
     fflush_Stdin();
 
-    printf("\n\"%s\" please choose either of (x/o) as move ->\t", player1);
+    green();
+    printf("\n\"%s\" please choose either of \x1b[43m\x1b[31m (x/o) \x1b[40m\033[0;32m as move ->\t", player1);
+    reset();
+
     int symbol = getkey();
 
-    if (symbol == 88)
-        symbol = CROSS;
+    while(symbol != cross && symbol != CROSS && symbol != circle && symbol != CIRCLE){
+        clscrn();
 
-    if (symbol == 79)
+        cyan();
+            printf("\nOOPS!!! it seems you have entered a wrong choice... re-enter\t");
+        reset();
+
+        symbol = getkey();
+    }
+
+    if (symbol == CROSS || symbol == cross)
+        symbol = CROSS;
+        
+    else if (symbol == CIRCLE || symbol == circle)
         symbol = CIRCLE;
 
-    printf("\n%c (chosen by \"%s\")", symbol, player1);
+    printf("\n \x1b[42m\x1b[37m %c \033[0;37m\x1b[35m (chosen by \"%s\")", symbol, player1);
 
     int SYMBOL;
 
-    if (symbol == CROSS)
+    if (symbol == CROSS || symbol == cross)
         SYMBOL = CIRCLE;
+        
 
-    else
+    else if (symbol == CIRCLE || symbol == circle)
         SYMBOL = CROSS;
 
-    printf("\n%c (of \"%s\")", SYMBOL, player2);
 
+    printf("\n\n \x1b[42m\x1b[37m %c \033[0;37m\x1b[35m (chosen by \"%s\")", SYMBOL, player2);
+
+    cyan();
     printf("\n\n\n\npress any key to continue\t");
+    reset();
     getkey();
 
     clscrn();
