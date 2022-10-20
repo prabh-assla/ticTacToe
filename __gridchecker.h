@@ -1,6 +1,5 @@
 bool checkPattern( int i, int j, int grid[i][j] ){
 
-
     char symbol = grid[0][0];
 
     if( symbol != 32 ){

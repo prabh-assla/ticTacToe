@@ -4,25 +4,7 @@
 #include <unistd.h>
 #include <termios.h>
 
-#include "__cursor.h"
-
-void clscrn(){
-
-    printf("\e[1;1H\e[2J");
-    gotoxy(1, 1);
-}
-
-#include "__getkey.h"
-
-void fflush_Stdin(){
-    int i;
-
-    do{
-    i = getkey();
-    } while( i != '\n' && i != EOF );
-
-}
-
+#include "__utilities.h"
 #include "__box.h"
 
 int main(){
