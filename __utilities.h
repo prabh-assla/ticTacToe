@@ -1,24 +1,28 @@
 
 // ---------------------gotoxy--------------------
-void gotoxy(int a, int b){
+void gotoxy(int a, int b)
+{
 
     printf("%c[%d;%df", 0X1B, b, a);
 }
 
 // to hide the cursor
-void hide_cursor(){
+void hide_cursor()
+{
 
     printf("\e[?25l");
 }
 
 // to re-enable the cursor
-void re_ENABLE(){
+void re_ENABLE()
+{
 
     printf("\e[?25h");
 }
 
 // to clear the screen
-void clscrn(){
+void clscrn()
+{
 
     printf("\e[1;1H\e[2J");
     gotoxy(1, 1);
@@ -31,112 +35,119 @@ void clscrn(){
 #define LEFT 68
 #define RIGHT 67
 
-int getch(){
+int getch()
+{
 
-        struct termios oldt, newt;
+    struct termios oldt, newt;
 
-        int ch;
-        tcgetattr( STDIN_FILENO, &oldt );
-        newt = oldt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
 
-        newt.c_lflag &= ~(ICANON | ECHO);
+    newt.c_lflag &= ~(ICANON | ECHO);
 
-        tcsetattr( STDIN_FILENO, TCSANOW, &newt );
-        ch = getchar();
-        tcsetattr( STDIN_FILENO, TCSANOW, &oldt );
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 
-return ch;
+    return ch;
 }
 
 int getkey()
 {
-	char ch;
+    char ch;
 
-	ch = getch();
-
-	if ( ch == 27 ){
     ch = getch();
 
-    if ( ch == 91 ){     
-    ch = getch();
+    if (ch == 27)
+    {
+        ch = getch();
 
-    if ( ch == 65|| ch == 66|| ch == 67|| ch == 68 )
-	return ch;
+        if (ch == 91)
+        {
+            ch = getch();
 
+            if (ch == 65 || ch == 66 || ch == 67 || ch == 68)
+                return ch;
+        }
+    }
 }
-}
-}
-
 
 // to flush the output buffer
-void fflush_Stdin(){
+void fflush_Stdin()
+{
     int i;
 
-    do{
-    i = getkey();
-    } while( i != '\n' && i != EOF );
-
+    do
+    {
+        i = getkey();
+    } while (i != '\n' && i != EOF);
 }
 
 //-------------------------------------------colors------------------------------------
 
-void red(){
+void red()
+{
     printf("\033[0;31m");
-
 }
 
-void cyan(){
+void cyan()
+{
     printf("\033[0;36m");
-
 }
 
-void yellow(){
+void yellow()
+{
     printf("\033[0;33m");
-
 }
 
-void purple(){
+void purple()
+{
     printf("\033[0;35m");
-
 }
 
-void green(){
+void green()
+{
     printf("\033[0;32m");
-
 }
 
-void blue(){
+void blue()
+{
     printf("\033[0;34m");
-
 }
 
-void reset(){
+void reset()
+{
     printf("\033[0;37m");
-
 }
 
 //--------------------------------------flash-------------------------------------
-void flash(){
+void flash()
+{
 
-clscrn();
+    clscrn();
 
-    int j = 10000;
+    int j = 3000;
 
-    for(int i = 0; i <= j; ++i)
-    printf("\e[107m ");
+    for (int i = 0; i <= j; ++i)
+        printf("\e[107m ");
 
-clscrn();
+    clscrn();
 
-    for(int i = 0; i <= j; ++i)
+    // for(int i = 0; i <= j; ++i)
     printf("\e[0m ");
+    reset();
 
-clscrn();
-                                                                            
+    clscrn();
 }
 
-void _flash_the_Screen(){
+void _flash_the_Screen()
+{
 
-    for(int i = 0; i<=1; ++i)
-    flash();
-
+    for (int i = 0; i <= 1; ++i)
+        flash();
 }
+
+//bold text
+#define COLOR_BOLD "\e[1m"
+#define COLOR_OFF "\e[m"

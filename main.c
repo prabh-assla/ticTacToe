@@ -8,7 +8,7 @@
 #include "./__box.h"
 
 int main(){
-
+    printf("\e[1m");
     clscrn();
 
     yellow();
@@ -39,36 +39,27 @@ int main(){
 
     int i = boxProcess( player1, 15, player2, 15 );
 
-                gotoxy(1, 14);
+        gotoxy(1, 14);
 
-                yellow();
+        yellow();
 
-                if( i==0 )
-                printf("draw is declared \a");
+            if( i==0 )
+            printf("draw is declared \a");
 
-                if( i==1 )
-                printf("%s is the winner \a", player1);
+            if( i==1 )
+            printf("%s is the winner \a", player1);
 
-                if( i==2 )
-                printf("%s is the winner \a", player2);
+            if( i==2 )
+            printf("%s is the winner \a", player2);
 
-                reset();
+        reset();
 
-
-    printf("                             ");
-
-
+        printf("                                \n");
 
     purple();
-    
-
-    printf("\n\n\"THANKS FOR PLAYING\"");
-
-
+        printf("\n\n\"THANKS FOR PLAYING\"\n\n");
     reset();
 
-    gotoxy(1, 20);
-
+    printf(COLOR_OFF);
 return 0;
-
 }

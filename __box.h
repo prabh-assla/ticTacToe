@@ -134,7 +134,7 @@ int boxProcess(char player1[], int size1, char player2[], int size2)
     printf("\n\n \x1b[42m\x1b[37m %c \033[0;37m\x1b[35m (chosen by \"%s\")", SYMBOL, player2);
 
     cyan();
-    printf("\n\n\n\npress any key to continue\t");
+    printf( COLOR_BOLD "\n\n\n\n\x1b[43mpress any key to continue\t" COLOR_OFF );
     reset();
     getkey();
 
