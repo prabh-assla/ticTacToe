@@ -1,43 +1,37 @@
-
-// ---------------------gotoxy--------------------
-void gotoxy(int a, int b)
-{
-
+// goto particular col and row
+static inline void gotoxy(int a, int b){
     printf("%c[%d;%df", 0X1B, b, a);
+
 }
 
-// to hide the cursor
-void hide_cursor()
-{
 
+// hide cursor & re-enable cursor
+static inline void hide_cursor(){
     printf("\e[?25l");
+
 }
 
-// to re-enable the cursor
-void re_ENABLE()
-{
-
+static inline void re_ENABLE(){
     printf("\e[?25h");
+
 }
 
-// to clear the screen
-void clscrn()
-{
 
+// clear screen
+static inline void clscrn(){
     printf("\e[1;1H\e[2J");
     gotoxy(1, 1);
+
 }
 
-// --------------reading keys--------------------
 
-#define UP 65
-#define DOWN 66
-#define LEFT 68
-#define RIGHT 67
+// read keys
+    #define UP 65
+    #define DOWN 66
+    #define LEFT 68
+    #define RIGHT 67
 
-int getch()
-{
-
+int getch(){
     struct termios oldt, newt;
 
     int ch;
@@ -53,11 +47,8 @@ int getch()
     return ch;
 }
 
-int getkey()
-{
-    char ch;
-
-    ch = getch();
+int getkey(){
+    char ch = getch();
 
     if (ch == 27)
     {
@@ -73,81 +64,85 @@ int getkey()
     }
 }
 
-// to flush the output buffer
-void fflush_Stdin()
-{
+
+// flushing output buffer
+void fflush_Stdin(){
     int i;
 
-    do
-    {
+    do{
         i = getkey();
+
     } while (i != '\n' && i != EOF);
 }
 
-//-------------------------------------------colors------------------------------------
 
-void red()
-{
+// color setting...
+static inline void red(){
     printf("\033[0;31m");
+
 }
 
-void cyan()
-{
+static inline void cyan(){
     printf("\033[0;36m");
+
 }
 
-void yellow()
-{
+static inline void yellow(){
     printf("\033[0;33m");
+
 }
 
-void purple()
-{
+static inline void purple(){
     printf("\033[0;35m");
+
 }
 
-void green()
-{
+static inline void green(){
     printf("\033[0;32m");
+
 }
 
-void blue()
-{
+static inline void blue(){
     printf("\033[0;34m");
+
 }
 
-void reset()
-{
+static inline void black(){
+    printf("\x1b[30m");
+
+}
+
+static inline void reset(){
     printf("\033[0;37m");
+
 }
 
-//--------------------------------------flash-------------------------------------
-void flash()
-{
+
+// flash functionality...
+void flash(){
+    clscrn();
+
+        int j = 3000;
+
+        for (int i = 0; i <= j; ++i)
+            printf("\e[107m");
 
     clscrn();
 
-    int j = 3000;
-
-    for (int i = 0; i <= j; ++i)
-        printf("\e[107m ");
+        printf("\e[0m");
+        reset();
 
     clscrn();
 
-    // for(int i = 0; i <= j; ++i)
-    printf("\e[0m ");
-    reset();
-
-    clscrn();
 }
 
-void _flash_the_Screen()
-{
+void _flash_the_Screen(){
 
     for (int i = 0; i <= 1; ++i)
         flash();
 }
 
-//bold text
+//bold text utility
+
 #define COLOR_BOLD "\e[1m"
 #define COLOR_OFF "\e[m"

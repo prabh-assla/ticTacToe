@@ -1,5 +1,4 @@
 #include "__gridchecker.h"
-#include "__IF_filledchecker.h"
 #include "__whoISthePLAYER.h"
 
 #define CROSS 120
@@ -7,9 +6,7 @@
 #define CIRCLE 111
 #define circle 79
 
-int getcolumn(int y)
-{
-
+static inline int getcolumn(int y){
     if (y == 6)
         return 0;
 
@@ -20,9 +17,7 @@ int getcolumn(int y)
         return 2;
 }
 
-int getrow(int x)
-{
-
+static inline int getrow(int x){
     if (x == 3)
         return 0;
 
@@ -33,8 +28,7 @@ int getrow(int x)
         return 2;
 }
 
-void displayPATTERN(int indexY, int indexX, int grid[indexX][indexY])
-{
+void displayPATTERN(int indexY, int indexX, int grid[indexX][indexY]){
 
     for (int i = 6; i <= 16; i += 5)
     {
@@ -51,8 +45,7 @@ void displayPATTERN(int indexY, int indexX, int grid[indexX][indexY])
     }
 }
 
-void displayBox(int y, int x)
-{
+void displayBox(int y, int x){
 
     red();
 
@@ -79,18 +72,16 @@ void displayBox(int y, int x)
             printf("%c", 32);
         }
     }
-
     cyan();
 
     gotoxy(y, x);
-    printf("%c", 42);
+        printf( COLOR_BOLD "%c", 42);
+        printf( COLOR_OFF );
 
     reset();
 }
 
-int boxProcess(char player1[], int size1, char player2[], int size2)
-{
-
+int boxProcess(char player1[], int size1, char player2[], int size2){
     hide_cursor();
 
     int grid[3][3] = {32, 32, 32, 32, 32, 32, 32, 32, 32};
@@ -98,7 +89,7 @@ int boxProcess(char player1[], int size1, char player2[], int size2)
     fflush_Stdin();
 
     green();
-    printf("\n\"%s\" please choose either of \x1b[43m\x1b[31m (x/o) \x1b[40m\033[0;32m as move ->\t", player1);
+        printf("\n\"%s\" please choose either of \x1b[43m\x1b[31m (x/o) \x1b[40m\033[0;32m as move ->\t", player1);
     reset();
 
     int symbol = getkey();
@@ -113,47 +104,49 @@ int boxProcess(char player1[], int size1, char player2[], int size2)
         symbol = getkey();
     }
 
-    if (symbol == CROSS || symbol == cross)
-        symbol = CROSS;
-        
-    else if (symbol == CIRCLE || symbol == circle)
-        symbol = CIRCLE;
+
+            if (symbol == CROSS || symbol == cross)
+                symbol = CROSS;
+                
+            else if (symbol == CIRCLE || symbol == circle)
+                symbol = CIRCLE;
 
     printf("\n \x1b[42m\x1b[37m %c \033[0;37m\x1b[35m (chosen by \"%s\")", symbol, player1);
 
     int SYMBOL;
 
-    if (symbol == CROSS || symbol == cross)
-        SYMBOL = CIRCLE;
-        
 
-    else if (symbol == CIRCLE || symbol == circle)
-        SYMBOL = CROSS;
+            if (symbol == CROSS || symbol == cross)
+                SYMBOL = CIRCLE;
+                
+
+            else if (symbol == CIRCLE || symbol == circle)
+                SYMBOL = CROSS;
 
 
     printf("\n\n \x1b[42m\x1b[37m %c \033[0;37m\x1b[35m (chosen by \"%s\")", SYMBOL, player2);
 
     cyan();
-    printf( COLOR_BOLD "\n\n\n\n\x1b[43mpress any key to continue\t" COLOR_OFF );
+        printf( COLOR_BOLD "\n\n\n\n\x1b[43m press any key to continue \t" COLOR_OFF );
     reset();
     getkey();
 
     clscrn();
 
-    int changeOFturns = symbol;
+        int changeOFturns = symbol;
 
-    int choicey = 16;
-    int choicex = 9;
+        int choicey = 16;
+        int choicex = 9;
 
     displayBox(choicey, choicex);
 
-    int key = 32;
+        int key = 32;
 
-    bool win = false;
-    bool filled = false;
-    bool insertionWASsuccessful = false;
+        bool win = false;
+        bool filled = false;
+        bool insertionWASsuccessful = false;
 
-    int const winner_HAD_symbol = symbol;
+        int const winner_HAD_symbol = symbol;
 
     whoISplaying(changeOFturns, winner_HAD_symbol, player1, 15, player2, 15);
 
