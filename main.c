@@ -48,17 +48,17 @@ int main(){
         black();
 
             if( i==0 )
-            printf( COLOR_BOLD " \x1b[42m draw is declared" COLOR_OFF );
+            printf( COLOR_BOLD " \x1b[42m draw is declared " COLOR_OFF );
 
             else if( i==1 ){
 
-                printf( COLOR_BOLD " \x1b[42m %s is the winner", player1);
+                printf( COLOR_BOLD " \x1b[42m %s is the winner ", player1);
                 printf( COLOR_OFF );
             }
 
             else if( i==2 ){
 
-                printf( COLOR_BOLD " \x1b[42m %s is the winner", player2);
+                printf( COLOR_BOLD " \x1b[42m %s is the winner ", player2);
                 printf( COLOR_OFF );
             }
 

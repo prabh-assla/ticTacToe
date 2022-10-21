@@ -94,8 +94,9 @@ int boxProcess(char player1[], int size1, char player2[], int size2){
 
     int symbol = getkey();
 
-    while(symbol != cross && symbol != CROSS && symbol != circle && symbol != CIRCLE){
         clscrn();
+
+    while(symbol != cross && symbol != CROSS && symbol != circle && symbol != CIRCLE){
 
         cyan();
             printf("\nOOPS!!! it seems you have entered a wrong choice... re-enter\t");
